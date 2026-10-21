@@ -4,14 +4,16 @@ import com.biolab.segurit.dtos.ClienteDTO;
 import com.biolab.segurit.entitiy.Cliente;
 import com.biolab.segurit.entitiy.Role;
 import com.biolab.segurit.repository.ClienteRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ClienteService {
-
+    private final PasswordEncoder passwordEncoder;
     private final ClienteRepository clienteRepository;
 
-    public ClienteService(ClienteRepository clienteRepository) {
+    public ClienteService(PasswordEncoder passwordEncoder, ClienteRepository clienteRepository) {
+        this.passwordEncoder = passwordEncoder;
         this.clienteRepository = clienteRepository;
     }
 
@@ -19,10 +21,10 @@ public class ClienteService {
         Cliente cliente = new Cliente();
         cliente.setNome(request.getNome());
         cliente.setEmail(request.getEmail());
-        cliente.setSenha(request.getSenha());
+        cliente.setSenha(passwordEncoder.encode(request.getSenha()));
 
         if (request.getRole() == null) {
-            cliente.setRole(Role.USER);
+            cliente.setRole(Role.ROLE_ADMIN);
         } else {
             cliente.setRole(request.getRole());
         }

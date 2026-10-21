@@ -1,9 +1,6 @@
 package com.biolab.segurit.entitiy;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +11,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cliente {
@@ -23,5 +21,6 @@ public class Cliente {
     private String nome;
     private String email;
     private String senha;
-    private Role role;
+    @Enumerated(EnumType.STRING)
+    private Role rolee;
 }

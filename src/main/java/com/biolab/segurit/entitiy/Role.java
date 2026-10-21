@@ -1,6 +1,6 @@
 package com.biolab.segurit.entitiy;
 
 public enum Role {
-    ADMIN,
+    ROLE_ADMIN,
     USER
 }
